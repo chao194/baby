@@ -6,6 +6,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 /**
  * Vite 核心配置文件（Vue3 + Axios + Element Plus + SCSS 项目）
  * @核心要求：强制使用80端口，所有样式使用SCSS并配置全局变量
@@ -19,20 +21,16 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 export default defineConfig(({ mode }) => {
   return {
     // 插件：必装 vue 插件 + Element Plus 按需引入插件
-    plugins: [
-      vue(),
-      // 自动导入 Element Plus 相关函数（如 ElMessage/ElMessageBox）
-      AutoImport({
-        resolvers: [ElementPlusResolver()],
-        imports: ['vue'], // 自动导入 Vue 内置 API
-        dts: path.resolve(__dirname, 'src/auto-imports.d.ts') // 生成类型声明文件
-      }),
-      // 自动导入 Element Plus 组件
-      Components({
-        resolvers: [ElementPlusResolver()],
-        dts: path.resolve(__dirname, 'src/components.d.ts') // 生成组件声明文件
-      })
-    ],
+    plugins: [vue(), // 自动导入 Element Plus 相关函数（如 ElMessage/ElMessageBox）
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+      imports: ['vue'], // 自动导入 Vue 内置 API
+      dts: path.resolve(__dirname, 'src/auto-imports.d.ts') // 生成类型声明文件
+    }), // 自动导入 Element Plus 组件
+    Components({
+      resolvers: [ElementPlusResolver()],
+      dts: path.resolve(__dirname, 'src/components.d.ts') // 生成组件声明文件
+    }), cloudflare()],
 
     // 路径别名：简化 src 目录导入（如 import request from '@/utils/request'）
     resolve: {
@@ -84,5 +82,5 @@ export default defineConfig(({ mode }) => {
       // 压缩：生产环境默认开启，可自定义压缩配置
       minify: 'esbuild'
     }
-  }
+  };
 })
