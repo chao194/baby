@@ -1,0 +1,159 @@
+/* 全局样式文件 */
+@use './variables.scss' as *;
+
+html::-webkit-scrollbar {
+  width: 0; /* 设置宽度为0，补充隐藏滚动条 */
+  height: 0; /* 设置高度为0，补充隐藏滚动条 */
+}
+
+/* 重置样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+  font-size: $font-size-md;
+  color: $text-color-primary;
+  background-color: $bg-color-secondary;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+  transition: $transition-base;
+
+  &:hover {
+    color: $color-primary-light;
+  }
+}
+
+/* 容器 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+/* 标题 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-md;
+  color: $text-color-primary;
+}
+
+h1 {
+  font-size: $font-size-xxxl;
+}
+
+h2 {
+  font-size: $font-size-xxl;
+}
+
+h3 {
+  font-size: $font-size-xl;
+}
+
+/* 按钮 */
+.btn {
+  display: inline-block;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-base;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: $transition-base;
+  border: none;
+  outline: none;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &-primary {
+    background-color: $color-primary;
+    color: white;
+
+    &:hover {
+      background-color: $color-primary-light;
+    }
+  }
+
+  &-secondary {
+    background-color: $color-secondary;
+    color: white;
+
+    &:hover {
+      background-color: $color-secondary-light;
+    }
+  }
+
+  &-outline {
+    background-color: transparent;
+    border: 1px solid $color-primary;
+    color: $color-primary;
+
+    &:hover {
+      background-color: $color-primary;
+      color: white;
+    }
+  }
+}
+
+/* 卡片 */
+.card {
+  background-color: $bg-color-primary;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-base;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-lg;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  h1 {
+    font-size: $font-size-xxl;
+  }
+
+  h2 {
+    font-size: $font-size-xl;
+  }
+
+  h3 {
+    font-size: $font-size-lg;
+  }
+}
